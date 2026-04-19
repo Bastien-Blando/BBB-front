@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { user } from '$lib/stores/auth.js';
 	import { booklistStatus, updateBookStatus, getBookStatus } from '$lib/stores/booklistStore.js';
+	import { API_URL } from '$lib/config.js';
 
 	let loadingBooks = $state(new Set());
 
@@ -50,7 +51,7 @@
 		const promises = booksToCheck.map(async (book) => {
 			try {
 				const response = await fetch(
-					`http://localhost:3000/user/${decodedToken.id}/book/${book.id}/status`,
+					`${API_URL}/user/${decodedToken.id}/book/${book.id}/status`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
@@ -103,7 +104,7 @@
 		try {
 			if (currentStatus.inBooklist) {
 				const response = await fetch(
-					`http://localhost:3000/user/${decodedToken.id}/book/${book.id}`,
+					`${API_URL}/user/${decodedToken.id}/book/${book.id}`,
 					{
 						method: 'DELETE',
 						headers: {
@@ -118,7 +119,7 @@
 				}
 			} else {
 				const response = await fetch(
-					`http://localhost:3000/user/${decodedToken.id}/book/${book.id}`,
+					`${API_URL}/user/${decodedToken.id}/book/${book.id}`,
 					{
 						method: 'POST',
 						headers: {

@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { user } from '$lib/stores/auth.js';
 	import { booklistStatus, updateBookStatus, getBookStatus } from '$lib/stores/booklistStore.js';
+	import { API_URL } from '$lib/config.js';
 
 	let inBooklist = $state(false);
 	let toRead = $state(true);
@@ -30,7 +31,7 @@
 
 		try {
 			const response = await fetch(
-				`http://localhost:3000/user/${decodedToken.id}/book/${data.book.id}/status`,
+				`${API_URL}/user/${decodedToken.id}/book/${data.book.id}/status`,
 				{
 					headers: {
 						Authorization: `Bearer ${token}`,
@@ -76,7 +77,7 @@
 		try {
 			if (inBooklist) {
 				const response = await fetch(
-					`http://localhost:3000/user/${decodedToken.id}/book/${data.book.id}`,
+					`${API_URL}/user/${decodedToken.id}/book/${data.book.id}`,
 					{
 						method: 'DELETE',
 						headers: {
@@ -95,7 +96,7 @@
 				}
 			} else {
 				const response = await fetch(
-					`http://localhost:3000/user/${decodedToken.id}/book/${data.book.id}`,
+					`${API_URL}/user/${decodedToken.id}/book/${data.book.id}`,
 					{
 						method: 'POST',
 						headers: {
@@ -148,7 +149,7 @@
 		isReadLoading = true;
 		try {
 			const response = await fetch(
-				`http://localhost:3000/user/${decodedToken.id}/book/${data.book.id}`,
+				`${API_URL}/user/${decodedToken.id}/book/${data.book.id}`,
 				{
 					method: 'PUT',
 					headers: {
@@ -282,7 +283,7 @@
 </div>
 
 <div class="exit-container">
-	<a href="/catalogue"><button class="exit">Retour catalogue</button></a>
+	<a href="/catalogue" class="exit">Retour catalogue</a>
 </div>
 
 <style>
@@ -303,9 +304,7 @@
 
 	.genre-container {
 		display: block;
-		border: var(--couleur-marron);
 		margin-left: auto;
-		border: var(--couleur-marron);
 		background-color: var(--couleur-beige-clair);
 		border-radius: 10px;
 		border: solid 2px var(--couleur-marron);
@@ -473,13 +472,12 @@
 		.author-container {
 			display: flex;
 			flex-direction: column;
-			border: var(--couleur-marron);
 			margin-left: 1rem;
 			margin-top: 1rem;
 			margin-right: auto;
-			border: var(--couleur-marron);
 			background-color: var(--couleur-beige-clair);
 			border-radius: 10px;
+			border: solid 2px var(--couleur-marron);
 		}
 
 		.author {

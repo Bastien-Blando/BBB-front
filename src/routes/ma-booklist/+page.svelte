@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { updateBookStatus } from '$lib/stores/booklistStore.js';
+	import { API_URL } from '$lib/config.js';
 
 	let booklist = [];
 	let totalBooks = 0;
@@ -37,7 +38,7 @@
 
 		try {
 			const response = await fetch(
-				`http://localhost:3000/user/${decodedToken.id}/book/${book.book.id}`,
+				`${API_URL}/user/${decodedToken.id}/book/${book.book.id}`,
 				{
 					method: 'PUT',
 					headers: {
@@ -77,7 +78,7 @@
 		}
 
 		try {
-			const res = await fetch(`http://localhost:3000/userbooks?page=${pageNumber}&limit=${limit}`, {
+			const res = await fetch(`${API_URL}/userbooks?page=${pageNumber}&limit=${limit}`, {
 				headers: { Authorization: `Bearer ${token}` }
 			});
 
@@ -114,7 +115,7 @@
 			console.log(`Suppression du livre: ${book.book.title}`);
 
 			const response = await fetch(
-				`http://localhost:3000/user/${decodedToken.id}/book/${book.book.id}`,
+				`${API_URL}/user/${decodedToken.id}/book/${book.book.id}`,
 				{
 					method: 'DELETE',
 					headers: {
