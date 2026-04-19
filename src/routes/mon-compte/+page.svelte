@@ -55,7 +55,7 @@
 				<img
 					class="avatar"
 					src={currentUser.avatar
-						? `${API_URL}/${currentUser.avatar}`
+						? currentUser.avatar
 						: '/images/Avatar_crop.jpg'}
 					alt="avatar"
 				/>
