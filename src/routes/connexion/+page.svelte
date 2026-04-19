@@ -12,7 +12,7 @@
 
 		const formData = new FormData(event.target);
 
-		const res = await fetch('${API_URL}/user/login', {
+		const res = await fetch(`${API_URL}/user/login`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -51,7 +51,7 @@
 		}
 
 		// Envoie le FormData tel quel, sans JSON.stringify
-		const res = await fetch('${API_URL}/user/register', {
+		const res = await fetch(`${API_URL}/user/register`, {
 			method: 'POST',
 			body: formData //  multipart/form-data automatiquement géré
 		});
